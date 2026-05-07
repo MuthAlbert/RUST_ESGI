@@ -1,0 +1,17 @@
+[
+  { "name": "Alice Martin",    "number": "0612345678" },
+  { "name": "Bob Dupont",      "number": "0687654321" },
+  { "name": "Charlie Bernard", "number": "0712345678" },
+  { "name": "Diana Lefebvre",  "number": "0698765432" },
+  { "name": "Eve Moreau",      "number": "0623456789" },
+  { "name": "François Simon",  "number": "0634567890" },
+  { "name": "Grace Laurent",   "number": "0645678901" },
+  { "name": "Henri Petit",     "number": "0656789012" },
+  { "name": "Isabelle Roy",    "number": "0667890123" },
+  { "name": "Jules Blanc",     "number": "0678901234" },
+  { "name": "Karine Leroy",    "number": "0689012345" },
+  { "name": "Luc Thomas",      "number": "0712398765" },
+  { "name": "Marie Durand",    "number": "0723456789" },
+  { "name": "Nicolas Girard",  "number": "0734567890" },
+  { "name": "Olivia Mercier",  "number": "0745678901" }
+]
