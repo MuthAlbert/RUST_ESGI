@@ -40,10 +40,3 @@ Lancer les tests
 cargo test
 ```
 Visualiser le diagramme
-Avec Docker :
-```
-docker run -d -p 8080:8080 plantuml/plantuml-server:jetty
-```
-Puis ouvre http://localhost:8080 et colle le contenu de graph/04_common_parts.puml.
-
-Sans Docker : colle le contenu sur https://www.plantuml.com/plantuml/uml/
