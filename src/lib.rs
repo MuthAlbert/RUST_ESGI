@@ -46,3 +46,13 @@ impl TrieNode {
         }
     }
 }
+
+impl Default for TrieNode {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+pub struct Trie {
+    pub root: TrieNode,
+}
