@@ -30,7 +30,27 @@ fn lire_contacts(json_path: &str) -> Vec<Contact> {
 }
 
 // Construit le Trie à partir d'une liste de contacts
-fn construire_trie(contacts: &[Contact]) -> Trie {}
+fn construire_trie(contacts: &[Contact]) -> Trie {
+    let mut trie = Trie::new();
+
+    for contact in contacts {
+        let clean_number: String = contact
+            .number
+            .chars()
+            .filter(|c| c.is_ascii_digit())
+            .collect();
+
+        if clean_number.is_empty() {
+            eprintln!("Avertissement : numéro invalide ignoré pour '{}'", contact.name);
+            continue;
+        }
+
+        trie.insert(&clean_number, &contact.name);
+    }
+
+    println!("Trie construit avec succès !");
+    trie
+}
 
 // Génère le fichier PlantUML à partir du Trie
 fn exporter_plantuml(trie: &Trie, output_path: &str) {}
