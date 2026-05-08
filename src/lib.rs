@@ -56,3 +56,43 @@ impl Default for TrieNode {
 pub struct Trie {
     pub root: TrieNode,
 }
+
+impl Trie {
+    pub fn new() -> Self {
+        Trie {
+            root: TrieNode::new(),
+        }
+    }
+    pub fn insert(&mut self, number: &str, name: &str) {
+        let mut current_node = &mut self.root;
+        
+        for digit in number.chars() {
+            // crée le nœud s'il n'existe pas, sinon retourne l'existant
+            current_node = current_node
+                .children
+                .entry(digit)
+                .or_insert_with(TrieNode::new);
+        }
+        current_node.is_end = true;
+        current_node.contact_name = Some(name.to_string());
+    }
+    pub fn search(&self, number: &str) -> bool {
+        let mut current_node = &self.root;
+
+        for digit in number.chars() {
+            match current_node.children.get(&digit) {
+                Some(next) => current_node = next,
+                None => return false,
+            }
+        }
+        current_node.is_end
+    }
+    pub fn to_plantuml(&self) -> String {
+        let mut output = String::new();
+        output.push_str("@startmindmap\n");
+        output.push_str("* Trie\n");
+        self.root.generate_puml(&mut output, 2);
+        output.push_str("@endmindmap\n");
+        output
+    }
+}
