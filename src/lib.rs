@@ -96,3 +96,9 @@ impl Trie {
         output
     }
 }
+
+impl Default for Trie {
+    fn default() -> Self {
+        Self::new()
+    }
+}
