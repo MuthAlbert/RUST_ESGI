@@ -102,3 +102,42 @@ impl Default for Trie {
         Self::new()
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_insertion_et_recherche() {
+        let mut trie = Trie::new();
+        trie.insert("0612345678", "Alice");
+
+        assert!(trie.search("0612345678"), "Le numéro doit être trouvé");
+        assert!(!trie.search("0612345679"), "Ce numéro ne doit pas être trouvé");
+        assert!(!trie.search("061234567"), "Préfixe seul ne doit pas matcher");
+    }
+
+    #[test]
+    fn test_plusieurs_numeros_meme_prefixe() {
+        let mut trie = Trie::new();
+        trie.insert("0612345678", "Alice");
+        trie.insert("0612345679", "Bob");
+        trie.insert("0687654321", "Charlie");
+
+        assert!(trie.search("0612345678"));
+        assert!(trie.search("0612345679"));
+        assert!(trie.search("0687654321"));
+        assert!(!trie.search("0600000000"));
+    }
+
+    #[test]
+    fn test_plantuml_contient_markers() {
+        let mut trie = Trie::new();
+        trie.insert("061", "Test");
+        let puml = trie.to_plantuml();
+
+        assert!(puml.contains("@startmindmap"));
+        assert!(puml.contains("@endmindmap"));
+        assert!(puml.contains("* Trie"));
+    }
+}
