@@ -53,7 +53,26 @@ fn construire_trie(contacts: &[Contact]) -> Trie {
 }
 
 // Génère le fichier PlantUML à partir du Trie
-fn exporter_plantuml(trie: &Trie, output_path: &str) {}
+fn exporter_plantuml(trie: &Trie, output_path: &str) {
+    let puml_content = trie.to_plantuml();
+
+    fs::create_dir_all("graph").unwrap_or_else(|err| {
+        eprintln!("Erreur : impossible de créer le dossier 'graph/' : {}", err);
+        process::exit(1);
+    });
+
+    fs::write(output_path, &puml_content).unwrap_or_else(|err| {
+        eprintln!("Erreur : impossible d'écrire '{}' : {}", output_path, err);
+        process::exit(1);
+    });
+
+    println!("Fichier PlantUML généré : {}", output_path);
+    println!();
+    println!("Pour visualiser le diagramme :");
+    println!("  1. Lancez PlantUML (voir README.md pour les instructions Docker)");
+    println!("  2. Ouvrez http://localhost:8080 dans votre navigateur");
+    println!("  3. Copiez-collez le contenu de '{}' dans l'interface", output_path);
+}
 
 fn main() {
     let contacts = lire_contacts("data/04_common_parts.json");
